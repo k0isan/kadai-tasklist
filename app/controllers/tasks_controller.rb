@@ -5,7 +5,6 @@ class TasksController < ApplicationController
   end
 
   def show
-      set_task
   end
 
   def new
@@ -25,19 +24,16 @@ class TasksController < ApplicationController
   end
 
   def edit
-      set_task
   end
 
   def update
-      set_task
-
-  if @task.update(task_params)
+    if @task.update(task_params)
       flash[:success] = 'タスクが編集されました'
       redirect_to @task
-  else
+    else
       flash.now[:danger] = 'タスクが編集されませんでした'
       render :new
-  end
+    end
   end
   
   def destroy
@@ -54,6 +50,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-      params.require(:task).permit(:content)
+      params.require(:task).permit(:content, :status)
   end
 end
